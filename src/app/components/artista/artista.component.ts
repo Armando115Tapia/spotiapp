@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router'
 export class ArtistaComponent {
   artista: any = {};
   loading: boolean;
+  topTracks: any[];
 
 
   constructor(
@@ -20,6 +21,7 @@ export class ArtistaComponent {
     this._activatedRoute.params.subscribe(params => {
       //console.log( this._serviceSpoty.getArtista(params['id']) );
       this.getArtista(params['id']);
+      this.getTopTracks(params['id']);
     });
 
 
@@ -32,6 +34,13 @@ export class ArtistaComponent {
        this.artista = artista;
        this.loading =false;
      })
+   }
+   getTopTracks(id: string){
+
+     this._serviceSpoty.getTopTracks(id).subscribe( topTracks => {
+       console.log(topTracks);
+       this.topTracks = topTracks;
+     });
    }
 
 
