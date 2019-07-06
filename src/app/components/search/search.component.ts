@@ -9,13 +9,19 @@ import { Component } from '@angular/core';
 export class SearchComponent  {
 
   artistas: any[] = [];
-  constructor(private _serviceSpotify: SpotifyService) { }
+  loading: boolean;
+
+  constructor(private _serviceSpotify: SpotifyService) {
+
+  }
 
   buscar(termino: string){
-  this._serviceSpotify.getArtista(termino).subscribe(
+  this.loading = true;
+  this._serviceSpotify.getArtistas(termino).subscribe(
     (data: any) => {
       console.log(data);
        this.artistas = data;
+       this.loading=false;
     }
   );
 
